@@ -1,23 +1,4 @@
-        @font-face {
-            font-family: logo_font;
-            src: url(../fonts/Ara-Hamah-AlThawra.ttf);
-        }
-        
-        @font-face {
-            font-family: segoeuil;
-            src: url(../fonts/segoeuil.ttf);
-        }
-        
-        @font-face {
-            font-family: segoeui;
-            src: url(../fonts/segoeui.ttf);
-        }
-        
-        @font-face {
-            font-family: segoeuib;
-            src: url(../fonts/segoeuib.ttf);
-        }
-        
+                
         body {
             font-family: segoeui;
         }
