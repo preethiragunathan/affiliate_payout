@@ -5,8 +5,15 @@ $obj  = new database();
 if (isset($_POST['submit'])) {
 
     $data = array();
-    if ($_POST['ref_id'] != '') {
+    if ($_POST['ref_id'] != '' && $_POST['ref_id']>0) {
         $referrer_id = $_POST['ref_id'];
+        $referrer_exists = $obj->select_column_by_id('id', 'users', $referrer_id);
+        if (!$referrer_exists) {
+            $_SESSION['user']['log']['alert-class'] = "danger";
+            $_SESSION['user']['log']['msg'] = "Referral ID not found!";
+            header('location:add_user.php');
+            exit;
+        }
         $userlevel = $obj->select_column_by_id('level', 'users', $referrer_id);
         $level = $userlevel + 1;
     } else {
@@ -53,9 +60,9 @@ if (isset($_POST['submit'])) {
                     <div class="card login-form">
                         <div class="card-body">
                             <?php
-                            if (isset($_SESSION['user']['alert-class']) && isset($_SESSION['user']['msg'])) {
-                                echo '<div class="alert alert-' . $_SESSION['user']['alert-class'] . '" role="alert">' . $_SESSION['user']['msg'] . '</div>';
-                                unset($_SESSION['user']);
+                            if (isset($_SESSION['user']['log']['alert-class']) && isset($_SESSION['user']['log']['msg'])) {
+                                echo '<div class="alert alert-' . $_SESSION['user']['log']['alert-class'] . '" role="alert">' . $_SESSION['user']['log']['msg'] . '</div>';
+                                unset($_SESSION['user']['log']);
                             }
                             ?>
                             <h3 class="card-title text-center">Add User</h3>

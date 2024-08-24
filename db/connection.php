@@ -51,8 +51,6 @@ class database extends connect
 
     public function select_all_by_column($table, $column, $val)
     {
-        // echo $val;
-        // echo "SELECT * FROM $table WHERE $column=?"; exit;
         $stmt = $this->con->prepare("SELECT * FROM $table WHERE $column=?");
         $data = array($val);
         $stmt->execute($data);
@@ -77,5 +75,27 @@ class database extends connect
 
         $values = array_merge(array_values($data), array_values($where));
         return $stmt->execute($values);
+    }
+
+    public function get_user_heirarchy($data)
+    {
+        $sql = "WITH RECURSIVE hierarchy AS ( SELECT id, referrer_id, level FROM users WHERE id = ?
+                UNION ALL
+                SELECT u.id, u.referrer_id, u.level
+                FROM users u
+                INNER JOIN hierarchy h ON u.id = h.referrer_id
+                WHERE h.level > 1 )
+            SELECT * FROM hierarchy
+            WHERE level <= 5;";  
+        $stmt = $this->con->prepare($sql);
+        $stmt->execute([$data['id']]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function get_total_commission($user_id) {
+        $sql = "SELECT SUM(amount) as total_commission FROM payouts WHERE user_id = ?";
+        $stmt = $this->con->prepare($sql);
+        $stmt->execute([$user_id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC)['total_commission'];
     }
 }

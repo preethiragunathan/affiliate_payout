@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 22, 2024 at 08:00 PM
+-- Generation Time: Aug 24, 2024 at 08:14 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.1.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,27 +24,14 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `commissions`
---
-
-CREATE TABLE `commissions` (
-  `id` int(11) NOT NULL,
-  `level` int(11) NOT NULL,
-  `percentage` decimal(5,2) NOT NULL,
-  `created_datetime` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `payouts`
 --
 
 CREATE TABLE `payouts` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `sale_id` int(11) NOT NULL,
   `amount` decimal(10,2) NOT NULL,
-  `description` text DEFAULT NULL,
   `created_datetime` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -60,7 +47,6 @@ CREATE TABLE `sales` (
   `amount` decimal(10,2) NOT NULL,
   `item_id` int(11) NOT NULL,
   `commission_paid` tinyint(4) NOT NULL,
-  `commission_paid_on` datetime DEFAULT NULL,
   `created_datetime` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -83,12 +69,6 @@ CREATE TABLE `users` (
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `commissions`
---
-ALTER TABLE `commissions`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `payouts`
@@ -114,12 +94,6 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
-
---
--- AUTO_INCREMENT for table `commissions`
---
-ALTER TABLE `commissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `payouts`
@@ -154,12 +128,6 @@ ALTER TABLE `payouts`
 --
 ALTER TABLE `sales`
   ADD CONSTRAINT `sales_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
---
--- Constraints for table `users`
---
-ALTER TABLE `users`
-  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`referrer_id`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

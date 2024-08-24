@@ -13,26 +13,7 @@ $user_id=$_SESSION['user']['id'];
 
 <body>
 
-    <!-- Top Navigation Menu -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="<?= $obj->base_url ?>dashboard.php">Home</a>
-                    </li>
-                    <?php if ($user_level >= 1 && $user_level <= 5): ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?= $obj->base_url ?>commission.php">Commission</a>
-                        </li>
-                    <?php endif; ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?= $obj->base_url ?>logout.php">Logout</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <?php include "common/menu.php"; ?>
 
     <!-- Items with Sale Button -->
     <div class="container mt-5">
@@ -53,7 +34,7 @@ $user_id=$_SESSION['user']['id'];
                             <span class="text-muted">Rs.250.00</span>
                         </div>
                         <p class="card-text">This is a brief description of Item 1.</p>
-                        <a href="sales.php?item_id=1&price=250&user_id=<?= $user_id ?>" class="btn btn-danger">Sale</a>
+                        <a href="sales.php?item_id=1&price=250" class="btn btn-danger">Sale</a>
                     </div>
                 </div>
             </div>
@@ -66,7 +47,7 @@ $user_id=$_SESSION['user']['id'];
                             <span class="text-muted">Rs.450.00</span>
                         </div>
                         <p class="card-text">This is a brief description of Item 2.</p>
-                        <a href="sales.php?item_id=2&price=450&user_id=<?= $user_id ?>" class="btn btn-danger">Sale</a>
+                        <a href="sales.php?item_id=2&price=450" class="btn btn-danger">Sale</a>
                     </div>
                 </div>
             </div>
@@ -79,7 +60,7 @@ $user_id=$_SESSION['user']['id'];
                             <span class="text-muted">Rs.350.00</span>
                         </div>
                         <p class="card-text">This is a brief description of Item 3.</p>
-                        <a href="sales.php?item_id=3&price=350&user_id=<?= $user_id ?>" class="btn btn-danger">Sale</a>
+                        <a href="sales.php?item_id=3&price=350" class="btn btn-danger">Sale</a>
                     </div>
                 </div>
             </div>
@@ -95,7 +76,7 @@ $user_id=$_SESSION['user']['id'];
                             <span class="text-muted">Rs.650.00</span>
                         </div>
                         <p class="card-text">This is a brief description of Item 4.</p>
-                        <a href="sales.php?item_id=4&price=650&user_id=<?= $user_id ?>" class="btn btn-danger">Sale</a>
+                        <a href="sales.php?item_id=4&price=650" class="btn btn-danger">Sale</a>
                     </div>
                 </div>
             </div>
@@ -108,7 +89,7 @@ $user_id=$_SESSION['user']['id'];
                             <span class="text-muted">Rs.840.00</span>
                         </div>
                         <p class="card-text">This is a brief description of Item 5.</p>
-                        <a href="sales.php?item_id=1&price=840&user_id=<?= $user_id ?>" class="btn btn-danger">Sale</a>
+                        <a href="sales.php?item_id=1&price=840" class="btn btn-danger">Sale</a>
                     </div>
                 </div>
             </div>
@@ -121,7 +102,7 @@ $user_id=$_SESSION['user']['id'];
                             <span class="text-muted">Rs.740.00</span>
                         </div>
                         <p class="card-text">This is a brief description of Item 6.</p>
-                        <a href="sales.php?item_id=1&price=740&user_id=<?= $user_id ?>" class="btn btn-danger">Sale</a>
+                        <a href="sales.php?item_id=1&price=740" class="btn btn-danger">Sale</a>
                     </div>
                 </div>
             </div>
